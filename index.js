@@ -7,14 +7,7 @@ const bodyParser = require('body-parser');
 
 dotenv.config();
 
-const corsOptions = {
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  preflightContinue: false,
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
 const configuration = new Configuration({
@@ -32,7 +25,6 @@ app.post('/', async (req, res) => {
   else{
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      mode: 'no-cors',
       messages: [
         {
           role: "user",
